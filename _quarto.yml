@@ -1,0 +1,18 @@
+project:
+  type: book
+
+book:
+  title: "testing"
+  author: "Norah Jones"
+  date: "11/5/2023"
+  chapters:
+    - index.qmd
+
+bibliography: references.bib
+
+format:
+  pdf:
+    documentclass: scrreprt
+
+
+
