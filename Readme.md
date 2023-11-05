@@ -1,16 +1,23 @@
 
+```{.bash} 
+# 1. render the unchanged project to latex
+quarto render --to latex
+# 2. Add and commit `_book` to the repo. 
+# Note that this folder was in gitignore before.
+git add _book
+git commit -m "render original"
+# get the pull request and create a new branch
+# this worflow might be different on the gh-action
+git fetch origin pull/$ID/head:new-pr 
+git checkout new-pr
 
-1. render the unchanged project to latex:
-    ```
-    quarto render --to latex
-    ```
-2. Make a copy of this project (is this necessary? Maybe I can just commit the changes to the branch and compare the branches afterward?)
-   ```
-   cp -r _book _book_original
-   ```
-3. Check out the pull request. 
-   - Locally, I would need to know the pull request number. On the gh-action, there is a variable for this.
-   - Will `_book_original` still exist after checkout?
+# 3. render the changed project to latex
+quarto render --to latex
+# 4. Add and commit `_book` to the repo.
+git add _book
+git commit -m "render new"
+```
+
 4. Render a changed project to tex (see step 1).
 5. Run latexdiff filename_original.tex filename.tex > diff.tex. 
    - Note that the latex files are in a subfolder of the book folder, named after the title of the book. E.g. `_book_original/book-latex/testing.tex`
