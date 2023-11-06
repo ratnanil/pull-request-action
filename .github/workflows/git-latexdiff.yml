@@ -54,7 +54,8 @@ jobs:
           name: diff-pdf
           path: diff.pdf
 
-      - name: PR comment with file
+      - name: Comment PR
         uses: thollander/actions-comment-pull-request@v2
         with:
-          message: "${{ github.server_url }}/${{ github.repository }}/suites/{{ env.SUITE_ID }}/artifacts/$ {{ env.ARTIFACT_ID }}"
+          message: |
+            Hello world ! :wave:
