@@ -16,25 +16,26 @@ jobs:
 
       - name: set up GitHub
         run: |
-          cat index.qmd
-          git fetch origin
-          git rebase origin/main
           git config --global user.name 'Nils'
           git config --global user.email 'ratnanil@users.noreply.github.com'
 
       - name: Render project to latex
         run: | 
-          #quarto render --to latex
-          #git add -f _book
-          #git commit -m "render original"
-          #OLD=$(git rev-parse HEAD)
+          quarto render --to latex
+          git add -f _book
+          git commit -m "render original"
+          OLD=$(git rev-parse HEAD)
+      - name: install latex-diff
+        run: |
+          git clone https://gitlab.com/git-latexdiff/git-latexdiff
+          cd git-latexdiff
+          make install
       - name: Checkout Pull request and recompile to latex
         run: |
           git fetch origin pull/3/head:new-pr 
           git merge --allow-unrelated-histories -s recursive -X theirs new-pr -m "merge"
-          cat index.qmd
-          #quarto render --to latex
-          #git add -f _book
-          #git commit -m "render new"
-          #echo $OLD
+          quarto render --to latex
+          git add -f _book
+          git commit -m "render new"
+          echo $OLD
 
