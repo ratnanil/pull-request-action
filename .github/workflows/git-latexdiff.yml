@@ -30,7 +30,7 @@ jobs:
       - name: Checkout pull request
         run: | 
           git fetch origin pull/${{ github.event.pull_request.number }}/head:new-pr 
-          git merge new-pr -m "merge"
+          git merge --allow-unrelated-histories -s recursive -X theirs new-pr -m "merge"      
       - name: Render copy to latex
         run: |
           quarto render --to latex
@@ -47,7 +47,7 @@ jobs:
           cd ..
       - name: run git-latexdiff
         run: |
-          OLD=$(git rev-parse HEAD~2)
+          OLD=$(git rev-parse HEAD~3)
           /usr/lib/git-core/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
 
       - uses: actions/upload-artifact@v3
