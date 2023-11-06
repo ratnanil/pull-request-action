@@ -29,6 +29,7 @@ jobs:
           git clone https://gitlab.com/git-latexdiff/git-latexdiff
           cd git-latexdiff
           sudo make install-bin
+          which git-latexdiff
           cd ..
       - name: Checkout Pull request and recompile to latex
         run: |
@@ -38,7 +39,8 @@ jobs:
           git add -f _book
           git commit -m "render new"
           OLD=$(git rev-parse HEAD~3)
-          git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
+          #git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
+          
           
       - uses: actions/upload-artifact@v3
         with:
