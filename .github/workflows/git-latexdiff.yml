@@ -1,9 +1,9 @@
 name: git-latexdiff
 on:
-  push
+  pull_request: 
+    types: [opened]
 permissions:
   contents: write
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -39,15 +39,15 @@ jobs:
           git clone https://gitlab.com/git-latexdiff/git-latexdiff
           cd git-latexdiff
           sudo make install-bin
-          which /usr/lib/git-core/git-latexdiff
           cd ..
+
+      - name: run git-latexdiff
+        run: |
           OLD=$(git rev-parse HEAD~2)
-          echo /usr/lib/git-core/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
           /usr/lib/git-core/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
-          
           
       - uses: actions/upload-artifact@v3
         with:
-          name: Upload diff
+          name: diff-pdf
           path: diff.pdf
 
