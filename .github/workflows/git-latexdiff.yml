@@ -24,7 +24,6 @@ jobs:
           quarto render --to latex
           git add -f _book
           git commit -m "render original"
-          OLD=$(git rev-parse HEAD)
       - name: install latex-diff
         run: |
           git clone https://gitlab.com/git-latexdiff/git-latexdiff
@@ -38,7 +37,7 @@ jobs:
           quarto render --to latex
           git add -f _book
           git commit -m "render new"
-          echo $OLD
+          OLD=$(git rev-parse HEAD~3)
           /usr/lib/git-core/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
           
       - uses: actions/upload-artifact@v3
