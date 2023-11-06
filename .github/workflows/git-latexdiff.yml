@@ -30,7 +30,7 @@ jobs:
       - name: Checkout pull request
         run: | 
           git fetch origin pull/${{ github.event.pull_request.number }}/head:new-pr 
-          git merge --allow-unrelated-histories -s recursive -X theirs new-pr -m "merge"
+          git merge new-pr -m "merge"
       - name: Recompile to latex
         run: |
           quarto render --to latex
