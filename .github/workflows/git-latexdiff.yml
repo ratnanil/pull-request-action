@@ -31,7 +31,10 @@ jobs:
           quarto render --to latex
           git add -f _book
           git commit -m "render new"
-      - name: install latex-diff
+      - name: install latexdiff
+        run: |
+          sudo apt-get -y install latexdiff
+      - name: install git-latexdiff
         run: |
           git clone https://gitlab.com/git-latexdiff/git-latexdiff
           cd git-latexdiff
