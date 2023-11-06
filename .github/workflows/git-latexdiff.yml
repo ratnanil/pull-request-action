@@ -44,14 +44,17 @@ jobs:
           cd git-latexdiff
           sudo make install-bin
           cd ..
-
       - name: run git-latexdiff
         run: |
           OLD=$(git rev-parse HEAD~2)
           /usr/lib/git-core/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
-          
+
       - uses: actions/upload-artifact@v3
         with:
           name: diff-pdf
           path: diff.pdf
 
+      - name: PR comment with file
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          filePath: diff.pdf
