@@ -53,8 +53,12 @@ jobs:
           name: diff-pdf
           path: diff.pdf
 
-      - name: Comment PR
-        uses: thollander/actions-comment-pull-request@v2
+      - name: add artifact links to pull request and related issues step
+        uses: tonyhallett/artifacts-url-comments@v1.1.0
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          message: |
-            ${{ github.server_url }}/${{ github.repository }}/suites/${{ env.SUITE_ID }}/artifacts/${{ env.ARTIFACT_ID }}
+            prefix: Here are the artifacts 
+            suffix: Have a nice day.
+            format: name
+            addTo: pullandissues
