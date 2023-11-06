@@ -26,11 +26,15 @@ jobs:
           quarto render --to latex
           git add -f _book
           git commit -m "render original"
-      - name: Checkout Pull request and recompile to latex
-        run: |
+      - name: Checkout pull request
+        run: | 
           #git fetch origin pull/3/head:new-pr 
           #git merge --allow-unrelated-histories -s recursive -X theirs new-pr -m "merge"
           gh pr merge ${{ github.event.pull_request.number }} --auto
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Recompile to latex
+        run: |
           quarto render --to latex
           git add -f _book
           git commit -m "render new"
