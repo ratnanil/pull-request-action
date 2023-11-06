@@ -57,4 +57,4 @@ jobs:
       - name: PR comment with file
         uses: thollander/actions-comment-pull-request@v2
         with:
-          filePath: diff.pdf
+          message: "${{ github.server_url }}/${{ github.repository }}/suites/{{ env.SUITE_ID }}/artifacts/$ {{ env.ARTIFACT_ID }}"
