@@ -39,7 +39,7 @@ jobs:
           git add -f _book
           git commit -m "render new"
           echo $OLD
-          git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
+          /usr/lib/git-core/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
           
       - uses: actions/upload-artifact@v3
         with:
