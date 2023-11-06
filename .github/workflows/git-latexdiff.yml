@@ -24,13 +24,6 @@ jobs:
           quarto render --to latex
           git add -f _book
           git commit -m "render original"
-      - name: install latex-diff
-        run: |
-          git clone https://gitlab.com/git-latexdiff/git-latexdiff
-          cd git-latexdiff
-          sudo make install-bin
-          which /usr/lib/git-core/git-latexdiff
-          cd ..
       - name: Checkout Pull request and recompile to latex
         run: |
           git fetch origin pull/3/head:new-pr 
@@ -39,7 +32,14 @@ jobs:
           git add -f _book
           git commit -m "render new"
           OLD=$(git rev-parse HEAD~3)
-          #git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
+      - name: install latex-diff
+        run: |
+          git clone https://gitlab.com/git-latexdiff/git-latexdiff
+          cd git-latexdiff
+          sudo make install-bin
+          which /usr/lib/git-core/git-latexdiff
+          cd ..
+          /usr/lib/git-core/git-latexdiff/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
           
           
       - uses: actions/upload-artifact@v3
