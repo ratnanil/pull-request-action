@@ -4,18 +4,21 @@
 quarto render --to latex
 # 2. Add and commit `_book` to the repo. 
 # Note that this folder was in gitignore before.
-git add _book
+git add -f _book
 git commit -m "render original"
-# get the pull request and create a new branch
-# this worflow might be different on the gh-action
+# get the pull request and merge with main
 git fetch origin pull/$ID/head:new-pr 
-git checkout new-pr
+git merge new-pr
 
 # 3. render the changed project to latex
 quarto render --to latex
 # 4. Add and commit `_book` to the repo.
-git add _book
+git add -f _book
 git commit -m "render new"
+
+# 5. run git-latexdiff
+
+
 ```
 
 4. Render a changed project to tex (see step 1).
