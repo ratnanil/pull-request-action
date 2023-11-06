@@ -29,7 +29,7 @@ jobs:
         run: |
           git fetch origin pull/3/head:new-pr 
           git branch
-          #git merge new-pr -m "merge pull request"
+          git merge new-pr -m "merge pull request"
           #quarto render --to latex
           #git add -f _book
           #git commit -m "render new"
