@@ -28,9 +28,10 @@ jobs:
       - name: Checkout Pull request and recompile to latex
         run: |
           git fetch origin pull/3/head:new-pr 
-          git merge new-pr -m "merge pull request"
-          quarto render --to latex
-          git add -f _book
-          git commit -m "render new"
-          echo $OLD
+          cat index.qmd
+          #git merge new-pr -m "merge pull request"
+          #quarto render --to latex
+          #git add -f _book
+          #git commit -m "render new"
+          #echo $OLD
 
