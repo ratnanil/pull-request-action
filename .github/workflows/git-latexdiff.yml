@@ -29,7 +29,7 @@ jobs:
         run: |
           git clone https://gitlab.com/git-latexdiff/git-latexdiff
           cd git-latexdiff
-          make install
+          sudo make install
       - name: Checkout Pull request and recompile to latex
         run: |
           git fetch origin pull/3/head:new-pr 
