@@ -25,12 +25,12 @@ jobs:
           git add -f _book
           git commit -m "render original"
           OLD=$(git rev-parse HEAD)
-          echo $OLD
-      
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      - name: Run a multi-line script
+      - name: Checkout Pull request and recompile to latex
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          git fetch origin pull/$ID/head:new-pr 
+          git merge new-pr -m "merge pull request"
+          quarto render --to latex
+          git add -f _book
+          git commit -m "render new"
+          echo $OLD
+
