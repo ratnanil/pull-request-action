@@ -22,7 +22,7 @@ jobs:
           git config --global user.name 'Nils'
           git config --global user.email 'ratnanil@users.noreply.github.com'
 
-      - name: Render project to latex
+      - name: Render original to latex
         run: | 
           quarto render --to latex
           git add -f _book
@@ -30,8 +30,8 @@ jobs:
       - name: Checkout pull request
         run: | 
           git fetch origin pull/${{ github.event.pull_request.number }}/head:new-pr 
-          git merge --allow-unrelated-histories -s recursive -X theirs new-pr -m "merge"
-      - name: Recompile to latex
+          git merge new-pr -m "merge"
+      - name: Render copy to latex
         run: |
           quarto render --to latex
           git add -f _book
