@@ -39,7 +39,7 @@ jobs:
           sudo make install-bin
           which /usr/lib/git-core/git-latexdiff
           cd ..
-          /usr/lib/git-core/git-latexdiff/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
+          /usr/lib/git-core/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
           
           
       - uses: actions/upload-artifact@v3
