@@ -6,6 +6,7 @@ on:
       - synchronize
 permissions:
   contents: write
+  pull-requests: write 
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -58,4 +59,4 @@ jobs:
         uses: thollander/actions-comment-pull-request@v2
         with:
           message: |
-            Hello world ! :wave:
+            ${{ github.server_url }}/${{ github.repository }}/suites/{{ env.SUITE_ID }}/artifacts/$ {{ env.ARTIFACT_ID }}
