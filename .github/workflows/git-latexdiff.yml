@@ -42,6 +42,7 @@ jobs:
           which /usr/lib/git-core/git-latexdiff
           cd ..
           OLD=$(git rev-parse HEAD~3)
+          echo /usr/lib/git-core/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
           /usr/lib/git-core/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
           
           
