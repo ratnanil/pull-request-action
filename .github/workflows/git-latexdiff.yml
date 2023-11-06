@@ -28,11 +28,8 @@ jobs:
           git commit -m "render original"
       - name: Checkout pull request
         run: | 
-          #git fetch origin pull/3/head:new-pr 
-          #git merge --allow-unrelated-histories -s recursive -X theirs new-pr -m "merge"
-          gh pr merge ${{ github.event.pull_request.number }} --auto
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git fetch origin pull/${{ github.event.pull_request.number }}/head:new-pr 
+          git merge --allow-unrelated-histories -s recursive -X theirs new-pr -m "merge"
       - name: Recompile to latex
         run: |
           quarto render --to latex
