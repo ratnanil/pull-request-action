@@ -47,7 +47,7 @@ jobs:
           cd ..
       - name: run git-latexdiff
         run: |
-          OLD=$(git rev-parse HEAD~3)
+          OLD=$(git rev-parse HEAD~2)
           /usr/lib/git-core/git-latexdiff --main _book/book-latex/testing.tex -o diff.pdf $OLD 
 
       - uses: actions/upload-artifact@v3
